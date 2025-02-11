@@ -1,4 +1,4 @@
-import {typographyClasses} from '@/lib/typography'
+
 import {ProductType} from '@/types/product'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -6,17 +6,19 @@ import Link from 'next/link'
 type Props = {product: ProductType}
 
 export const ProductItem = ({product: {title, price, images, category, id}}: Props) => (
-    <li className='rounded-lg basis-30% flex flex-col gap-4'>
-        <Image src={images[0]} alt={title} />
-        <h3 className={`${typographyClasses.p1} block`}>{title}</h3>
-        <div className='grid grid-cols-2 gap-4'>
-            <p className={typographyClasses.p2}>Price:</p>
-            <p className={typographyClasses.t2}>$ {price}</p>
-            <p className={typographyClasses.p2}>Category:</p>
-            <p className={typographyClasses.t2}>{category.name}</p>
+    <li className='basis-[45%] lg:basis-[28%] flex flex-col justify-between gap-4 p-4 border'>
+        <div className="flex flex-col justify-between gap-4">
+            <div className='w-full h-[150px] md:h-[300px] relative'><Image src={images[0]} alt={title} fill style={{objectFit: "cover"}} /></div>
+            <h3 className="text-base font-medium block">{title}</h3>
+            <div className='grid grid-cols-2 gap-4'>
+                <p className="text-sm font-medium">Price:</p>
+                <p className="text-sm font-light">$ {price}</p>
+                <p className="text-sm font-medium">Category:</p>
+                <p className="text-sm font-light">{category.name}</p>
+            </div>
         </div>
-        <Link href={id.toString()}><button
-        className='border-x outline-none border-grey-900 rounded-sm py-4 px-6 '
+        <Link href={`/products/${id.toString()}`}><button
+        className='border border-gray-900 rounded-sm py-4 px-6 hover:bg-gray-200'
         >Learn more</button></Link>
     </li>
 )

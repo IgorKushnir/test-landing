@@ -4,8 +4,8 @@ import {ProductType} from '@/types/product'
 class ApiService {
 PRODUCTS_LIMIT = 10
 
-    async getProducts(page: number): Promise<ProductType[]> {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?offset=${(page - 1) * this.PRODUCTS_LIMIT}&limit=${this.PRODUCTS_LIMIT}`)
+    async getProducts(page: number, categoryId?: string): Promise<ProductType[]> {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?offset=${(page - 1) * this.PRODUCTS_LIMIT}&limit=${this.PRODUCTS_LIMIT}${categoryId ? `&categoryId=${categoryId}` : ''}`)
         const products = await response.json()
 
         return products
